@@ -15,6 +15,12 @@ class ToDoTableViewController: UITableViewController {
         super.viewDidLoad()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        getToDos()
+    }
+    
+    // MARK: Read the Core Data
+    
     func getToDos() {
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             if let toDosFromCoreData = try? context.fetch(ToDoCD.fetchRequest()) {
@@ -25,6 +31,7 @@ class ToDoTableViewController: UITableViewController {
             }
         }
     }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -69,8 +76,8 @@ class ToDoTableViewController: UITableViewController {
         }
         
         if let detailsViewController = segue.destination as? ToDoDetailsViewController {
-            if let selectedToDo = sender as? ToDo {
-                detailsViewController.todo = selectedToDo
+            if let selectedToDo = sender as? ToDoCD {
+                detailsViewController.toDoCD = selectedToDo
             }
         }
     }
