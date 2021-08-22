@@ -9,12 +9,22 @@ import UIKit
 
 class ToDoTableViewController: UITableViewController {
 
-    var todos: [ToDo] = []
+    var todoCDs: [ToDoCD] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
+    func getToDos() {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            if let toDosFromCoreData = try? context.fetch(ToDoCD.fetchRequest()) {
+                if let toDos = toDosFromCoreData as? [ToDoCD] {
+                    todoCDs = toDos
+                    tableView.reloadData()
+                }
+            }
+        }
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -24,18 +34,22 @@ class ToDoTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return todos.count
+        return todoCDs.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        let selectedToDo = todos[indexPath.row]
+        let selectedToDo = todoCDs[indexPath.row]
         
         if selectedToDo.priority == 1 {
-            cell.textLabel?.text = "❗️" + selectedToDo.name
+            if let name = selectedToDo.name {
+                cell.textLabel?.text = "❗️" + name
+            }
         }
         else if selectedToDo.priority == 2 {
-            cell.textLabel?.text = "‼️" + selectedToDo.name
+            if let name = selectedToDo.name {
+                cell.textLabel?.text = "‼️" + name
+            }
         }
         else {
             cell.textLabel?.text = selectedToDo.name
@@ -45,7 +59,7 @@ class ToDoTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedToDo = todos[indexPath.row]
+        let selectedToDo = todoCDs[indexPath.row]
         performSegue(withIdentifier: "moveToDetails", sender: selectedToDo)
     }
     
