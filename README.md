@@ -1,5 +1,8 @@
 # Swift: Todo List with Core Data
 
+## Screenshot
+![Simulator Screen Shot - iPhone 11 - 2021-09-14 at 19 40 24](https://user-images.githubusercontent.com/9497415/133315194-234bf4ca-2b5c-458e-a91e-e91b129a7b81.png)
+
 ## More Swift code
 - [Hello World!](https://github.com/erossini/Swift-HelloWorld)
 - [BMI Calculator](https://github.com/erossini/Swift-BMICalculator)
