@@ -1,4 +1,5 @@
 # Swift: Todo List with Core Data
+ToDo application that saves data in the Core Data (local database)
 
 ## Screenshot
 ![Simulator Screen Shot - iPhone 11 - 2021-09-14 at 19 40 24](https://user-images.githubusercontent.com/9497415/133315194-234bf4ca-2b5c-458e-a91e-e91b129a7b81.png)
